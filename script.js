@@ -108,6 +108,7 @@ function aggCarrito(array,container){
             <button class="cruz">❌</button>
             <h4 class = "card__titulo card__font card__padding">${i.mostrarTitulo()}</h4>
             <img class = "card__img" src = "${i.imagen}">
+            <div class="divcantidad"><button class="masuni">-</button><span class="cantidad">${i.cantidad}</span><button class="menosuni">+</button></div>
             <span class = "card__precio card__font">$${i.precio}</span>`;
         container.appendChild(card);
     });
@@ -124,7 +125,8 @@ carrito = [],
 cart = JSON.parse(localStorage.getItem('cart')),
 containerSelectionCarrito = document.querySelector("#container1"),
 containerTotal = document.querySelector(".container__total"),
-cruz = document.querySelectorAll(".cruz");
+cruz = document.querySelectorAll(".cruz"),
+botonComprar = document.querySelector(".botoncomprar");
 let filtrado = productos;
 crearCards(filtrado,sectionCards);
 const botonCarrito = document.querySelectorAll(".boton")
@@ -132,17 +134,34 @@ const botonCarrito = document.querySelectorAll(".boton")
 
 selectFiltro.addEventListener('change',()=>{
     if(selectFiltro.value == "2"){
-        crearCards(filtrado.sort((a,b)=>{return b.precio-a.precio}),sectionCards);    
+        crearCards(filtrado.sort((a,b)=>{return b.precio-a.precio}),sectionCards);
+        botones()    
     }
     else if(selectFiltro.value == "1"){
         crearCards(filtrado.sort((a,b)=>{return a.precio-b.precio}),sectionCards);
+        botones()
     }
 });
 selectCategoria.addEventListener('change',()=>{
-    selectFiltro.value = "Ordenar por"
+    selectFiltro.value = "Ordenar por";
     filtrado = productos.filter(objeto => objeto.categoria == selectCategoria.value);
     crearCards(filtrado,sectionCards);
+    botones()
 });
+botonComprar.addEventListener("click", ()=>{
+    Toastify({
+        text: "COMPRA EXITOSA",
+        duration: 0,
+        gravity: "top",
+        position: "right", 
+        stopOnFocus: true, 
+        style: {
+          opacity: ".93",
+          background: "linear-gradient(to top, #00b09b, #96c93d)",
+        }
+    }).showToast();
+})
+
 
 
 
@@ -153,23 +172,36 @@ selectCategoria.addEventListener('change',()=>{
 //         aggCarrito(carrito, sectionCarrito);
 //     })
 // });
-// document.querySelectorAll(".boton").forEach(boton=>{
-//     boton.addEventListener("click",()=>{
-//         console.log("hola");
-//         carrito.push(productos.find(element => element.id == boton.parentElement.id));
-//         localStorage.setItem('cart',JSON.stringify(carrito));
-//         aggCarrito(carrito, sectionCarrito);
-//     })
-// });
-
-
+function botones(){
+    document.querySelectorAll(".boton").forEach(boton=>{
+        boton.addEventListener("click",(x)=>{
+            if(carrito.find(element => element.id == boton.parentElement.id) == undefined){
+                carrito.push(productos.find(element => element.id == boton.parentElement.id));
+                localStorage.setItem('cart',JSON.stringify(carrito));
+                aggCarrito(carrito, sectionCarrito);
+            }else{
+                console.log(sectionCarrito);
+            };
+        });
+    });
+    // Toastify({
+    //     text: "Agregaste un producto al carrito",
+    //     duration: 1000,
+    //     gravity: "top",
+    //     position: "right", 
+    //     stopOnFocus: true, 
+    //     style: {
+    //       background: "linear-gradient(to top, #00b09b, #96c93d)",
+    //     },
+    // }).showToast();
+}
+botones()
 
 Toastify({
     text: "CARRITO",
     duration: 0,
     gravity: "bottom",
     position: "right", 
-    stopOnFocus: true, 
     style: {
       opacity: ".93",
       background: "linear-gradient(to top, #00b09b, #96c93d)",

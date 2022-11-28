@@ -10,7 +10,7 @@
     'main main'
     'main main'
     'footer footer';
-    grid-template-rows: 7% auto auto 5%;
+    grid-template-rows: 7% auto 5%;
 }
 .header{
     grid-area: header;
@@ -37,7 +37,6 @@
 }
 .main{
     grid-area: main;
-    height: 100%;
 }
 .main__div{
     position: relative;
@@ -82,8 +81,7 @@
     z-index: 50;
     background-color: rgb(255, 255, 255);
 }
-#container1{   
-    grid-area: main;
+#container1{
     position: absolute;
     width: 100%;
     background: linear-gradient(to right, #00b09b, #96c93d);
@@ -123,8 +121,10 @@
     font-size: 2em;
     background-color: rgb(255, 255, 255);
 }
-
-
+.cantidad{}
+.masuni{}
+.menosuni{}
+.divcantidad{}
 
 
 
