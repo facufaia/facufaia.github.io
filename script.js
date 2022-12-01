@@ -5,6 +5,7 @@ class Productos {
         this.marca = marca;
         this.precio = parseFloat(precio);
         this.categoria = categoria;
+        this.cantidad = 1;
     }
 }
 class Tvs extends Productos {
@@ -82,8 +83,6 @@ const productos = [
     new Mouses ("https://http2.mlstatic.com/D_NQ_NP_706475-MLA31606024503_072019-O.webp", 302, "Hyper X", 2700, "Mouse", "Pulsefire Core", 6200, false),
     new Mouses ("https://http2.mlstatic.com/D_NQ_NP_967693-MLA43631701326_092020-O.webp", 303, "Kougar", 1478, "Mouse", "Minos X2", 3000, false)
 ]
-
-
 function crearCards(array,container){
     container.innerHTML = "";
     array.forEach(i => {
@@ -97,129 +96,203 @@ function crearCards(array,container){
             <button class = "boton">Añadir al carrito</button>`;
         container.appendChild(card);
     });
-}
-function aggCarrito(array,container){
-    container.innerHTML = "";
-    array.forEach(i => {
-        card = document.createElement("div");
-        card.className = "card";
-        card.id = `${i.id}`;
-        card.innerHTML =`
-            <button class="cruz">❌</button>
-            <h4 class = "card__titulo card__font card__padding">${i.mostrarTitulo()}</h4>
-            <img class = "card__img" src = "${i.imagen}">
-            <div class="divcantidad"><button class="masuni">-</button><span class="cantidad">${i.cantidad}</span><button class="menosuni">+</button></div>
-            <span class = "card__precio card__font">$${i.precio}</span>`;
-        container.appendChild(card);
-    });
-}
+}Toastify({
+    text: "CARRITO",
+    duration: 0,
+    gravity: "top",
+    position: "right", 
+    style: {
+      opacity: ".93",
+      background: "linear-gradient(to top, #00b09b, #96c93d)",
+      border: "2px solid white",
+    },
+    onClick: function(){
+        if (containerSelectionCarrito.classList == "unshow"){
+            containerSelectionCarrito.classList = "show";
+            containerCards.classList = "left";
+        }
+        else if (containerSelectionCarrito.classList == "show"){
+            containerSelectionCarrito.classList = "unshow";
+            containerCards.classList = "";
+        }
+    }
+}).showToast();
 
 
-
-
-const sectionCards = document.querySelector("#container"),
+const containerCards = document.querySelector("#container"),
 selectFiltro = document.querySelector("#selectFiltro"), 
 selectCategoria = document.querySelector("#selectCategoria"),
-sectionCarrito = document.querySelector("#container1__carrito"),
-carrito = [],
+containerCarrito = document.querySelector("#container1__carrito"),
 cart = JSON.parse(localStorage.getItem('cart')),
 containerSelectionCarrito = document.querySelector("#container1"),
 containerTotal = document.querySelector(".container__total"),
-cruz = document.querySelectorAll(".cruz"),
-botonComprar = document.querySelector(".botoncomprar");
-let filtrado = productos;
-crearCards(filtrado,sectionCards);
-const botonCarrito = document.querySelectorAll(".boton")
+cruz = document.querySelectorAll(".cruz");
+let filtrado = productos,
+carrito = [];
+crearCards(filtrado,containerCards);
+const botonCarrito = document.querySelectorAll(".boton");
 
 
+// botones();
 selectFiltro.addEventListener('change',()=>{
     if(selectFiltro.value == "2"){
-        crearCards(filtrado.sort((a,b)=>{return b.precio-a.precio}),sectionCards);
+        crearCards(filtrado.sort((a,b)=>{return b.precio-a.precio}),containerCards);
         botones()    
     }
     else if(selectFiltro.value == "1"){
-        crearCards(filtrado.sort((a,b)=>{return a.precio-b.precio}),sectionCards);
+        crearCards(filtrado.sort((a,b)=>{return a.precio-b.precio}),containerCards);
         botones()
     }
 });
 selectCategoria.addEventListener('change',()=>{
     selectFiltro.value = "Ordenar por";
     filtrado = productos.filter(objeto => objeto.categoria == selectCategoria.value);
-    crearCards(filtrado,sectionCards);
-    botones()
+    crearCards(filtrado,containerCards);
+    botones();
 });
-botonComprar.addEventListener("click", ()=>{
-    Toastify({
-        text: "COMPRA EXITOSA",
-        duration: 0,
-        gravity: "top",
-        position: "right", 
-        stopOnFocus: true, 
-        style: {
-          opacity: ".93",
-          background: "linear-gradient(to top, #00b09b, #96c93d)",
-        }
-    }).showToast();
-})
+// function botones(){
+//     document.querySelectorAll(".boton").forEach(boton=>{
+//         boton.addEventListener("click",(x)=>{
+//             producto = carrito.find(element => element.id == boton.parentElement.id);
+//             id = productos.find(element => element.id == boton.parentElement.id);
+//             if(producto == undefined){
+//                 carrito.push(id);
+//                 HTMLCarrito(carrito, containerCarrito);
+//                 //localStorage.setItem('cart',JSON.stringify(carrito));
+//             }else{
+//                 indice = carrito.findIndex((producto) => {producto.id == id.id});
+//                 producto.cantidad += 1;
+//                 carrito.splice(indice,1);
+//                 carrito.push(id);
+//                 HTMLCarrito(carrito, containerCarrito);
+//             }
+//             Toastify({
+//                 text: "Agregaste un producto al carrito",
+//                 duration: 1000,
+//                 gravity: "bottom",
+//                 position: "right", 
+//                 stopOnFocus: true, 
+//                 style: {
+//                   background: "linear-gradient(to top, #00b09b, #96c93d)",
+//                 },
+//             }).showToast();        
+//         });
+//     });
+// }
 
 
 
 
-// botonCarrito.forEach(boton => {
-//     boton.addEventListener('click', ()=>{
-//         carrito.push(productos.find(element => element.id == boton.parentElement.id));
-//         localStorage.setItem('cart',JSON.stringify(carrito));
-//         aggCarrito(carrito, sectionCarrito);
-//     })
-// });
-function botones(){
-    document.querySelectorAll(".boton").forEach(boton=>{
-        boton.addEventListener("click",(x)=>{
-            if(carrito.find(element => element.id == boton.parentElement.id) == undefined){
-                carrito.push(productos.find(element => element.id == boton.parentElement.id));
-                localStorage.setItem('cart',JSON.stringify(carrito));
-                aggCarrito(carrito, sectionCarrito);
-            }else{
-                console.log(sectionCarrito);
-            };
-        });
-    });
-    // Toastify({
-    //     text: "Agregaste un producto al carrito",
-    //     duration: 1000,
-    //     gravity: "top",
-    //     position: "right", 
-    //     stopOnFocus: true, 
-    //     style: {
-    //       background: "linear-gradient(to top, #00b09b, #96c93d)",
-    //     },
-    // }).showToast();
+
+
+
+loadEventListener()
+function loadEventListener(){
+    containerCards.addEventListener("click", addCarrito);
+    containerCarrito.addEventListener("click", deleteCarrito);
+    containerCarrito.addEventListener("click", botonRestar);
+    containerCarrito.addEventListener("click", botonSumar);
+    containerSelectionCarrito.addEventListener("click", botonComprar);
 }
-botones()
 
-Toastify({
-    text: "CARRITO",
-    duration: 0,
-    gravity: "bottom",
-    position: "right", 
-    style: {
-      opacity: ".93",
-      background: "linear-gradient(to top, #00b09b, #96c93d)",
-    },
-    onClick: function(){
-        let total = 0;
-        if (containerSelectionCarrito.classList == "unshow"){
-            containerSelectionCarrito.classList = "show";
-            sectionCards.classList = "left";
-        }
-        else if (containerSelectionCarrito.classList == "show"){
-            containerSelectionCarrito.classList = "unshow";
-            sectionCards.classList = "";
-        }
-        carrito.forEach(element => {
-            total += element.precio;
-        })
-        containerTotal.innerHTML = "";
-        containerTotal.innerHTML =`<h4 class = "total">TOTAL: $${total}</h4>`;
+function botonComprar(e){
+    if(e.target.classList == ("botoncomprar")){
+        HTMLComprar(carrito)
     }
-}).showToast();
+}
+
+function HTMLComprar(array){
+    formEnvio = document.createElement("div");
+    formEnvio.className = "formEnvio";
+    formEnvio.innerHTML = `
+    <div>DATOS DE ENVIO</div>
+    <div>
+    <form>
+    <input type="text">CALLE</input>
+    <input type="text">ALTURA</input>
+    <input type="text">CODIGO POSTAL</input>
+    <input type="text">PROVINCIA</input>
+    <input type="text">MUNICIPIO</input>
+    <input type="text">TELEFONO</input>
+    <input type="text">INDICACIONES ADICIONALES</input>
+    </form>
+    <div>CONTENEDOR DE PRODUCTOS</div>
+    </div>`;
+}
+
+function addCarrito(e){
+    e.preventDefault();
+    if(e.target.classList == ("boton")){
+        selectedProduct = productos.find(element => element.id == e.target.parentElement.id);
+        if(carrito.includes(selectedProduct)){
+            index = carrito.findIndex((item) => {item.id == selectedProduct.id});
+            selectedProduct.cantidad += 1;
+            carrito.splice(index,1);
+        }
+        carrito.push(selectedProduct);
+        HTMLCarrito(carrito,containerCarrito);
+        Toastify({
+            text: "Agregaste un producto al carrito",
+            duration: 1000,
+            gravity: "bottom",
+            position: "right", 
+            stopOnFocus: true, 
+            style: {
+            background: "linear-gradient(to top, #00b09b, #96c93d)",
+            },
+        }).showToast();
+    }
+}
+
+function deleteCarrito(e){
+    if(e.target.classList.contains("cruz")){
+        const deleteId = e.target.id;
+        carrito = carrito.filter(product => product.id != deleteId);
+    }
+    HTMLCarrito(carrito,containerCarrito);
+}
+
+function botonRestar(e){
+    if(e.target.classList.contains("menosuni")){
+        const selectedProduct = carrito.find(element => element.id == e.target.id);
+        selectedProduct.cantidad--;
+        if (selectedProduct.cantidad == 0){
+            carrito = carrito.filter(product => product.id != selectedProduct.id);
+        }
+        HTMLCarrito(carrito,containerCarrito);
+    }
+}
+
+function botonSumar(e){
+    if(e.target.classList.contains("masuni")){
+        const selectedProduct = carrito.find(produc => produc.id == e.target.id);
+        selectedProduct.cantidad++;
+        HTMLCarrito(carrito,containerCarrito);
+    }
+}
+
+function HTMLCarrito(array,container){
+    deleteHTML(container);
+    array.forEach(i => {
+        card = document.createElement("div");
+        card.className = "card";
+        card.id = `${i.id}`;
+        card.innerHTML =`
+            <h4 class = "card__titulo card__font card__padding">${i.mostrarTitulo()}</h4>
+            <button class="cruz" id="${i.id}">❌</button>
+            <img class = "card__img" src = "${i.imagen}">
+            <div class="divcantidad"><button id="${i.id}" class="menosuni">-</button><span class="cantidad">${i.cantidad}</span><button id="${i.id}"class="masuni">+</button></div>
+            <span class = "card__precio card__font">$${i.precio*i.cantidad}</span>`;
+        container.appendChild(card);
+    });
+    let total = 0;
+    carrito.forEach(element => {
+        total += element.precio*element.cantidad;
+    })
+    containerTotal.innerHTML = "";
+    containerTotal.innerHTML =`<h4 class = "total">TOTAL: $${total}</h4>`;
+}
+
+function deleteHTML(container){
+    container.innerHTML="";
+}
