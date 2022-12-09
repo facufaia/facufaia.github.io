@@ -1,53 +1,92 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script defer src="script2.js"></script>
-    <title>TIENDA DEL CODIGO</title>
+    <!-- <script defer src="script.js"></script> -->
+    <title>Facundo E. Tamagnon / Front End Developer</title>
 </head>
-<body class = "body">
-    <header class = "header">
-    <h1 class = "header__h" id = "hh1">PEDIDOS UNICAMENTE VIA WEB</h1>
-    <h2 class = "header__h" id = "hh2">NO TOMAMOS PEDIDOS POR NINGUNA RED SOCIAL</h2>
-    </header>
-    <main class="main">
-        <div class="logotipo">
-            <img src="./logo.jpg">
-        </div>
-        <section id = "container1" class="unshow">
-            <div id="container1__carrito"></div>
-            <div class="divinferior__carrito">
-                <button class = "botoncomprar">COMPRAR</button>
-                <div class="container__total"></div>
+<body>
+    <!-- <header>
+        <nav>
+            <div>
+                <i></i>
+            </div>
+            <div>
+                <ul>
+                    <li>Home</li>
+                    <li>About me</li>
+                    <li>Portfolio</li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+        </nav>
+    </header> -->
+    <main id="main">
+        <section id="home">
+            <div id="home__containerProfile">
+                <img src="./profile.jpg" alt="" id="home__profileImg" class="animate__animated animate__fadeInRight">
+                <div id="home__containerH1">
+                    <span class="home__text animate__animated animate__fadeInRight">Hi!</span>
+                    <h1 id="home__h1" class="home__text animate__animated animate__fadeInRight">I'm Facundo Tamagnon</h1>
+                    <span class="home__text animate__animated animate__fadeInRight">Front End Developer</span>
+                </div>
             </div>
         </section>
-        <div class = "divSelect">
-            <select class = "divSelect__select" id = "selectFiltro">
-                <option class = "divSelect__section" selected>Ordenar por</option>
-                <option class = "divSelect__section" value = "1">Menor precio</option>
-                <option class = "divSelect__section" value = "2">Mayor precio</option>
-            </select>
-            <select class = "divSelect__select" id = "selectCategoria">
-                <option selected>Categoria</option>
-                <option value = "Teclado">Teclados</option>
-                <option value = "Mouse">Mouses</option>
-                <option value = "Parlante">Parlantes</option>
-                <option value = "Smart TV">Smart TV</option>
-            </select>
-        </div>
-        <section id = "container"></section>
+        <section class="section">
+            <div class="container">
+                <h2 class="h2">My skills</h2>
+                <div id="mySkills__flex">
+                    <div class="caja">
+                        <img src="html.svg" alt="" class="imagen">
+                    </div>
+                    <div class="caja">
+                        <img src="css.svg" alt="" class="imagen">
+                    </div>
+                    <div class="caja">
+                        <img src="javascript.svg" alt="" class="imagen">
+                    </div>
+                    <div class="caja">
+                        <img src="github.svg" alt="" class="imagen">
+                    </div>
+                    <div class="caja">
+                        <img src="git.svg" alt="" class="imagen">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <h2 class="h2" class="text">Portfolio</h2>
+                <h3 class="text h3">Here you can see the projects I have worked on.</h3>
+                <div id="portfolio__flex">
+                    <div class="caja1"></div>
+                    <div class="caja1"></div>
+                    <div class="caja1"></div>
+                    <div class="caja1"></div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <h2 class="h2">Contact</h2>
+                <h3 class="text h3">Contact me if you want us to work together.</h3>
+                <div id="mySkills__flex">
+                    <div class="caja"><img src="linkedin.svg" class="imagen"></div>
+                    <div class="caja"><img src="mail.svg"  class="imagen"></div>
+                    <div class="caja"><img src="github.svg"  class="imagen"></div>
+                    <div class="caja"><img src=""  class="imagen"></div>
+                </div>
+            </div>
+        </section>
     </main>
-    <footer class = "footer">
-        <p>TIENDA DEL CODIGO All rights reserved</p>
+    <footer id="footer">
+        <p>Copyright © 2022. <a href="">@FacundoETamagnon</a></p>
+        <p>All Rights Reserved</p>
     </footer>
 </body>
 </html>
