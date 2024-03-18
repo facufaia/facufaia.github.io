@@ -1,37 +1,73 @@
 import NavBar from './components/NavBar.jsx'
-import AboutMe from './components/AboutMe.jsx'
+import About from './components/About.jsx'
 import Skills from './components/Skills.jsx'
 import Works from './components/Works.jsx'
-import Footer from './components/Footer.jsx'
-import Animated from "./components/Animated.jsx"
-import { useEffect } from 'react'
+import Contact from './components/Contact.jsx'
+import { useRef, useState, useEffect } from 'react'
+// import DesignSystem from './components/DesignSystem.jsx'
 
 function App() {
-  // useEffect(()=>{
-  //   const onChange = (entries) => {
-  //     console.log(entries);
-  //     console.log(entries[0]);
-  //   }
+	const aboutRef = useRef(null)
+	const worksRef = useRef(null)
+	const contactRef = useRef(null)
+	const skillsRef = useRef(null)
+	const sectionRefs = [aboutRef, worksRef, contactRef, skillsRef]
+	const [isActive, setIsActive] = useState(aboutRef)
 
-  //   const observer = new IntersectionObserver(onChange, {
-  //     rootMargin: '100px'
-  //   })
+	const scrollToSection = (targetRef) => {
+		if (targetRef && targetRef.current) {
+			targetRef.current.scrollIntoView({ behavior: 'smooth' })
+		}
+	}
 
-  //   observer.observe(document.getElementById('22'))
-  // },[])
+	useEffect(() => {
+		const options = {
+			root: null,
+			rootMargin: '0px',
+			threshold: 0.5,
+		}
 
-  return (
-    <>
-      <Animated />
-      <NavBar/>
-      <main className='relative text-4xl flex flex-col gap-32 items-center snap-y snap-mandatory text-[#d9e2f4] bg pb-16'>
-        <AboutMe />
-        <Works />
-        <Skills />
-      </main>
-      <Footer />
-    </>
-  )
+		const handleIntersection = (entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const targetRef = Object.values(sectionRefs).find(
+						(ref) => ref.current === entry.target
+					)
+					setIsActive(targetRef.current)
+				}
+			})
+		}
+
+		const observer = new IntersectionObserver(handleIntersection, options)
+
+		if (aboutRef.current) observer.observe(aboutRef.current)
+		if (worksRef.current) observer.observe(worksRef.current)
+		if (contactRef.current) observer.observe(contactRef.current)
+		if (skillsRef.current) observer.observe(skillsRef.current)
+
+		return () => {
+			observer.disconnect()
+		}
+	}, [])
+
+	return (
+		<>
+			<NavBar
+				scrollToSection={scrollToSection}
+				isActive={isActive}
+				setIsActive={setIsActive}
+				references={{ aboutRef, worksRef, contactRef, skillsRef }}
+			/>
+			<main className='relative overflow-hidden text-4xl flex flex-col gap-32 items-center text-white bg px-4'>
+				<div className='cloud-background-primary' />
+				<About ref={aboutRef} />
+				<Works ref={worksRef} />
+				<Skills ref={skillsRef} />
+				<Contact ref={contactRef} />
+				{/* <DesignSystem /> */}
+			</main>
+		</>
+	)
 }
 
 export default App

@@ -1,10 +1,60 @@
+/** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+	theme: {
+		extend: {
+			colors: {
+				primary: {
+					100: '#e2f2fc',
+					200: '#bee6f9',
+					300: '#84d3f5',
+					400: '#3bb9ed',
+					500: '#1aa4dd',
+					600: '#0d84bc',
+					700: '#0b6999',
+					800: '#0e597e',
+					900: '#114a69',
+					950: '#0b2f46',
+				},
+				secondary: {
+					100: '#f7ffc1',
+					200: '#f3ff86',
+					300: '#f5ff41',
+					400: '#fdff0d',
+					500: '#eadf00',
+					600: '#d1b500',
+					700: '#a68302',
+					800: '#89660a',
+					900: '#74530f',
+					950: '#442d04',
+				},
+				tertiary: {
+					100: '#ffdde3',
+					200: '#ffc1cc',
+					300: '#ff95a8',
+					400: '#ff5977',
+					500: '#ff264e',
+					600: '#fc0633',
+					700: '#eb002b',
+					800: '#af0524',
+					900: '#900c24',
+					950: '#50000f',
+				},
+				quaternary: {
+					50: '#fff9ed',
+					100: '#fff1d4',
+					200: '#ffdfa9',
+					300: '#ffc672',
+					400: '#fea339',
+					500: '#fc8107',
+					600: '#ed6b09',
+					700: '#c55109',
+					800: '#9c3f10',
+					900: '#7d3611',
+					950: '#441906',
+				},
+			},
+		},
+	},
+	plugins: [],
 }

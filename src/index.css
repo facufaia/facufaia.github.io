@@ -6,43 +6,203 @@
 White lilac (#F8F8F9), dark blue (#111439), color gradient
 Blue-grey (#96C2DB, #E5EDF1), white (#FFFFF)
 Dark classic blue (#0A1828), turquoise (#178582), gold (#BFA181)c3a583 */
-.bg{
-  background: rgb(16,21,45);
-  background: -moz-linear-gradient(17deg, rgba(16,21,45,1) 73%, rgba(17,237,171,1) 100%);
-  background: -webkit-linear-gradient(17deg, rgba(16,21,45,1) 73%, rgba(17,237,171,1) 100%);
-  background: linear-gradient(17deg, rgba(16,21,45,1) 73%, rgba(17,237,171,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#10152d",endColorstr="#11edab",GradientType=1);
+:root {
+	/* Primary colors */
+	--primary-100: #e2f2fc;
+	--primary-200: #bee6f9;
+	--primary-300: #84d3f5;
+	--primary-400: #3bb9ed;
+	--primary-500: #1aa4dd;
+	--primary-600: #0d84bc;
+	--primary-700: #0b6999;
+	--primary-800: #0e597e;
+	--primary-900: #114a69;
+	--primary-950: #0b2f46;
+
+	/* Secondary colors */
+	--secondary-100: #f7ffc1;
+	--secondary-200: #f3ff86;
+	--secondary-300: #f5ff41;
+	--secondary-400: #fdff0d;
+	--secondary-500: #eadf00;
+	--secondary-600: #d1b500;
+	--secondary-700: #a68302;
+	--secondary-800: #89660a;
+	--secondary-900: #74530f;
+	--secondary-950: #442d04;
+
+	/* Tertiary colors */
+	--tertiary-100: #ffdde3;
+	--tertiary-200: #ffc1cc;
+	--tertiary-300: #ff95a8;
+	--tertiary-400: #ff5977;
+	--tertiary-500: #ff264e;
+	--tertiary-600: #fc0633;
+	--tertiary-700: #eb002b;
+	--tertiary-800: #af0524;
+	--tertiary-900: #900c24;
+	--tertiary-950: #50000f;
+
+	/* Quaternary colors */
+	--quaternary-100: #deffc5;
+	--quaternary-200: #bfff92;
+	--quaternary-300: #95ff53;
+	--quaternary-400: #6dfb20;
+	--quaternary-500: #4feb00;
+	--quaternary-600: #37b500;
+	--quaternary-700: #2b8902;
+	--quaternary-800: #256c08;
+	--quaternary-900: #225b0c;
+	--quaternary-950: #0c3300;
+
+	/* Quinary colors */
+	--quinary-50: #fff9ed;
+	--quinary-100: #fff1d4;
+	--quinary-200: #ffdfa9;
+	--quinary-300: #ffc672;
+	--quinary-400: #fea339;
+	--quinary-500: #fc8107;
+	--quinary-600: #ed6b09;
+	--quinary-700: #c55109;
+	--quinary-800: #9c3f10;
+	--quinary-900: #7d3611;
+	--quinary-950: #441906;
 }
 
-.nav{
-  display: flex;
-  justify-content: space-between;
-  flex-grow: 1;
+.bg {
+	background-color: #0d0f1a;
+	position: relative;
 }
 
-.navItem{
-  transition-duration: 300ms;
-  transition-property: transform;
-  position: relative;
+@keyframes scroll {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
 }
 
-.currentActive{
-  text-shadow: 0px 0px 2px #ffffffdc;
-  transform: scale(107%);
+.slider_a {
+	animation: scroll 22s linear infinite;
 }
 
+.slider_b {
+	animation: scroll 20s linear infinite;
+}
 
+.contact_form_input {
+	background-color: transparent;
+	color: white;
+}
+.contact_form_input:-webkit-autofill {
+	background-color: yellow;
+	color: black;
+}
+.contact_form_input:focus {
+	background-color: transparent;
+	outline: none;
+}
+.contact_form_input:active {
+	background-color: transparent;
+}
+
+.cloud-background-primary {
+	content: '';
+	position: absolute;
+	top: 150px;
+	left: 100px;
+	width: 105px;
+	height: 105px;
+	background-color: var(--primary-400);
+	filter: blur(110px);
+	z-index: 20;
+}
+.cloud-background-tertiary {
+	content: '';
+	position: absolute;
+	top: 845px;
+	left: 170px;
+	width: 145px;
+	height: 180px;
+	background-color: var(--tertiary-500);
+	filter: blur(130px);
+	z-index: 20;
+}
+.cloud-background-quinary {
+	content: '';
+	position: absolute;
+	top: 2200px;
+	left: -20px;
+	width: 300px;
+	height: 300px;
+	background-color: var(--quinary-400);
+	filter: blur(290px);
+	z-index: 20;
+}
+
+@media (min-width: 768px) {
+	.cloud-background-tertiary {
+		top: 895px;
+		left: 700px;
+		width: 355px;
+		height: 180px;
+		filter: blur(130px);
+	}
+	.cloud-background-quinary {
+		top: 2500px;
+		left: -20px;
+		width: 350px;
+		height: 400px;
+		filter: blur(330px);
+	}
+}
+
+@keyframes moveUpDown {
+	0%,
+	100% {
+		transform: translateY(0);
+		opacity: 45%;
+	}
+	50% {
+		transform: translateY(10px);
+		opacity: 80%;
+	}
+}
+
+.arrow_down_animation {
+	animation: moveUpDown 2s linear infinite;
+}
+
+.nav {
+	display: flex;
+	justify-content: space-between;
+	flex-grow: 1;
+}
+
+.navItem {
+	transition-duration: 300ms;
+	transition-property: transform;
+	position: relative;
+}
+
+.currentActive {
+	text-shadow: 0px 0px 2px #ffffffdc;
+	transform: scale(107%);
+}
 
 /* ----> Nebula <---- */
 
 .nebula {
-  position: fixed;
-  width: 100px;
-  height: 100px;
-  background-color: #11edab13; /* Cambia los valores para personalizar el color y la transparencia */
-  border-radius: 50%;
-  pointer-events: none; /* Para que la nebulosa no afecte a los elementos debajo */
-  backdrop-filter: blur(10px); /* Agrega un efecto de desenfoque en navegadores compatibles */
-  mix-blend-mode: screen; /* Ajusta el modo de mezcla para que se vea más como una nebulosa */
-  z-index: 9999; /* Asegúrate de que la nebulosa esté por encima de otros elementos */
+	position: fixed;
+	width: 100px;
+	height: 100px;
+	background-color: #11edab13; /* Cambia los valores para personalizar el color y la transparencia */
+	border-radius: 50%;
+	pointer-events: none; /* Para que la nebulosa no afecte a los elementos debajo */
+	backdrop-filter: blur(
+		10px
+	); /* Agrega un efecto de desenfoque en navegadores compatibles */
+	mix-blend-mode: screen; /* Ajusta el modo de mezcla para que se vea más como una nebulosa */
+	z-index: 9999; /* Asegúrate de que la nebulosa esté por encima de otros elementos */
 }

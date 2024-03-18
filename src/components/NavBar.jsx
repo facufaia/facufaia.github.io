@@ -1,44 +1,70 @@
-import { motion } from 'framer-motion'
-import { useState } from "react"
+import { forwardRef } from 'react'
 
-const SECTIONS = [
-  {
-    name: 'About Me'
-  },{
-    name: 'Projects'
-  },{
-    name:'Contact'
-  }
-]
+const NavBar = forwardRef(
+	({ isActive, setIsActive, scrollToSection, references }, ref) => {
+		NavBar.displayName = 'NavBar'
 
+		const { aboutRef, worksRef, contactRef, skillsRef } = references
 
-function NavBar () {
-  const [ isActive, setIsActive ] = useState(0)
-
-  const handleClick = (index) => {
-    setIsActive(index);
-  }
-
-  return(
-      <header>
-        <nav className='flex fixed py-[1.1rem] z-10 text-lg justify-between px-4 text-[#d3d9e7] w-full bg-[#08041f] gap-10'>
-          <span className='text-[#259e7a]'>{'</>'}</span>
-          <ul className='nav'>
-            { SECTIONS.map((sec, index) => {
-                return(
-                  <li key={index} className='relative' onClick={()=>{handleClick(index)}}>
-                    <button className={isActive === index ? 'navItem currentActive' : 'navItem'}>
-                      {sec.name}
-                    </button>
-                    { index == isActive ? (<motion.div className="underline" layoutId="underline" />) : null }
-                  </li>
-                )
-              }
-            )}
-          </ul>
-        </nav>
-      </header>
-    )
-}
+		return (
+			<header>
+				<nav className='flex fixed py-[0.8rem] z-50 text-base tracking-wide justify-around items-center px-4 text-[#d3d9e7] bg-transparent backdrop-blur-md w-full'>
+					<ul
+						className={
+							isActive === aboutRef.current
+								? 'text-secondary-600'
+								: 'text-white'
+						}
+						onClick={() => {
+							scrollToSection(aboutRef)
+							setIsActive(aboutRef)
+						}}
+					>
+						ABOUT
+					</ul>
+					<ul
+						className={
+							isActive === worksRef.current
+								? 'text-secondary-600'
+								: 'text-white'
+						}
+						onClick={() => {
+							scrollToSection(worksRef)
+							setIsActive(worksRef.current)
+						}}
+					>
+						WORKS
+					</ul>
+					<ul
+						className={
+							isActive === skillsRef.current
+								? 'text-secondary-600'
+								: 'text-white'
+						}
+						onClick={() => {
+							scrollToSection(skillsRef)
+							setIsActive(skillsRef.current)
+						}}
+					>
+						SKILLS
+					</ul>
+					<ul
+						className={
+							isActive === contactRef.current
+								? 'text-secondary-600'
+								: 'text-white'
+						}
+						onClick={() => {
+							scrollToSection(contactRef)
+							setIsActive(contactRef.current)
+						}}
+					>
+						CONTACT
+					</ul>
+				</nav>
+			</header>
+		)
+	}
+)
 
 export default NavBar
