@@ -191,18 +191,23 @@ Dark classic blue (#0A1828), turquoise (#178582), gold (#BFA181)c3a583 */
 	transform: scale(107%);
 }
 
-/* ----> Nebula <---- */
+.fade-in-1 {
+	animation: fadeIn 1s ease-in-out;
+}
 
-.nebula {
-	position: fixed;
-	width: 100px;
-	height: 100px;
-	background-color: #11edab13; /* Cambia los valores para personalizar el color y la transparencia */
-	border-radius: 50%;
-	pointer-events: none; /* Para que la nebulosa no afecte a los elementos debajo */
-	backdrop-filter: blur(
-		10px
-	); /* Agrega un efecto de desenfoque en navegadores compatibles */
-	mix-blend-mode: screen; /* Ajusta el modo de mezcla para que se vea más como una nebulosa */
-	z-index: 9999; /* Asegúrate de que la nebulosa esté por encima de otros elementos */
+.fade-in-1_2 {
+	animation: fadeIn 1200ms ease-in-out;
+}
+
+.fade-in-1_4 {
+	animation: fadeIn 1400ms ease-in-out;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }

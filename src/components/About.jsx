@@ -7,9 +7,6 @@ import { forwardRef } from 'react'
 
 const About = forwardRef((props, reference) => {
 	About.displayName = 'About'
-	// https://react.dev/reference/react/forwardRef
-	// https://react.dev/reference/react/forwardRef#usage
-	// https://react.dev/reference/react/useImperativeHandle
 
 	return (
 		<section
@@ -19,9 +16,9 @@ const About = forwardRef((props, reference) => {
 			<div className='flex flex-col z-30 relative items-center gap-10 md:flex-row md:gap-40 md:justify-center md:w-full md:pb-16'>
 				<img
 					src={profilePic}
-					className='rounded-full w-[4.8em] h-[4.8em] md:w-[6em] md:h-[6em]'
+					className='rounded-full fade-in-1 w-[4.8em] h-[4.8em] md:w-[6em] md:h-[6em]'
 				/>
-				<div className='text-center flex flex-col translate-y-6 md:gap-4'>
+				<div className='text-center flex fade-in-1_2 flex-col translate-y-6 md:gap-4'>
 					<h1 className='text-2xl tracking-wider md:text-3xl'>
 						Facundo Falech
 					</h1>
@@ -30,7 +27,7 @@ const About = forwardRef((props, reference) => {
 					</span>
 				</div>
 			</div>
-			<div className='text-[1.7rem] flex gap-8 text-tertiary-500 md:text-4xl md:gap-16'>
+			<div className='text-[1.7rem] fade-in-1_4 flex gap-8 text-tertiary-500 md:text-4xl md:gap-16'>
 				<a
 					href='https://www.linkedin.com/in/facundo-e-falech-7ba27320b/'
 					target='blank'

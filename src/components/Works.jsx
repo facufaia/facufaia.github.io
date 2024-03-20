@@ -135,7 +135,7 @@ const Works = forwardRef((props, reference) => {
 						</div>
 						<div className='flex text-tertiary-600 justify-evenly w-full md:pb-2'>
 							<a
-								href=''
+								href='https://github.com/facufaia/rick_and_morty_api_vanilla'
 								target='blank'
 								onClick={(e) => {
 									if (clickAble === 2) {
@@ -148,7 +148,7 @@ const Works = forwardRef((props, reference) => {
 								<SiGithub />
 							</a>
 							<a
-								href=''
+								href='https://facufaia.github.io/rick_and_morty_api_vanilla/index.html'
 								target='blank'
 								onClick={(e) => {
 									if (clickAble === 2) {
